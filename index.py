@@ -1,11 +1,12 @@
 import requests as req
 import json
 import random
-import urllib.parse
+
 total = 0
 start = 1130000000
 end = 1160000000
 jumps = 1
+
 BASE_URL = "https://sapi.mawhiba.org/AIOlympics/api/Examresults/GetExamResultByNationalId/"
 USER_AGENT = ["Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/37.0.2062.94 Chrome/37.0.2062.94 Safari/537.36"
 ,"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36"
@@ -1041,12 +1042,8 @@ with open("data.json", "a") as outfile:
             data = json.loads(res.text)
             if data["Model"] is None:
                 print(f"ID: \033[1;31;40m{x}\033[0m  -  result: \033[0;37;41m{data['Model']}\033[0m  -  total: \033[1;31;40m{total}\033[0m")
-            
-            
             if data["Model"] is not None:
                 print(f"ID: \033[1;31;40m{x}\033[0m  -  result: \033[0;37;42m Found \033[1;33;40m\n {data['Model']}\033[0m  -  total: \033[1;31;40m{total}\033[0m")
-                json.dump(urllib.parse.unquote(data["Model"]), outfile)
+                json.dump(data["Model"], outfile)
                 outfile.write('\n\n')
                 total += 1
-
-
